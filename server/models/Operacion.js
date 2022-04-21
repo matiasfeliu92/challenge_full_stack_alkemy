@@ -7,6 +7,7 @@ const OperacionModel = db.define('operaciones', {
     concepto: {type: DataTypes.STRING, null: false},
     monto: {type: DataTypes.INTEGER, null: false},
     fecha: {type: DataTypes.DATEONLY, null: false},
+    tipo: {type: DataTypes.STRING, null: false},
 })
 
 module.exports = OperacionModel
