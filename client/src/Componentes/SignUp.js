@@ -2,6 +2,8 @@
 import axios from 'axios'
 import {useState} from 'react'
 import {useNavigate, Link} from 'react-router-dom'
+import swal from "sweetalert"
+import 'bootstrap/dist/css/bootstrap.css'
 
 const URI = 'http://localhost:4000/users/signUp'
 
@@ -15,8 +17,25 @@ const SignUp = () => {
 
     const registro = async (e) => {
         e.preventDefault()
-        await axios.post(URI, {nombre: nombre, apellido: apellido, email: email, password: password})
-        navigate('/signIn')
+        const res = await axios.post(URI, {nombre: nombre, apellido: apellido, email: email, password: password})
+        if (res.data.message === 'el usuario ya se encuentra en la base de datos') {
+            swal({
+                title: "fAIL",
+                text: res.data.message,
+                icon: "error",
+                button: "OK!"
+            })
+            navigate('/users/signUp')
+        } else {
+            swal({
+                title: "OK", 
+                text: "Register Success",
+                icon: "success",
+                button: "OK!"
+            })
+            navigate('/')
+        }
+        
     }
 
   return (
@@ -32,7 +51,7 @@ const SignUp = () => {
                 <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="ingresa tu email" />
                 <label className="form-label">password</label>
                 <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="ingresa una contraseña" />
-                <button type='submit' className='btn btn-primary'>Registrarse</button>
+                <button type="submit" className='btn btn-primary'>Registrarse</button>
             </div>
         </form>
     </div>
