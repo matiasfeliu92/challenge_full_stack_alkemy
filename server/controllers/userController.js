@@ -19,13 +19,10 @@ const userController = {
             if(req.body.password == user.password){
                 console.log(req.body.email)
                 return res.status(200).json({message: `Bienvenido ${user.email}`})
-            } else {
-                console.log('las credenciales son invalidas')
-                return res.status(403).json({message: 'las credenciales son invalidas'})
             }
         } else {
             console.log('no se encuentra el usuario en la base de datos')
-            return res.status(403).json({message: 'no se encuentra el usuario en la base de datos'})
+            res.status(403).json({message: 'no se encuentra el usuario en la base de datos'})
         }
     },
 

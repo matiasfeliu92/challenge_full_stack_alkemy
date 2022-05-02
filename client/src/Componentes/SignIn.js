@@ -1,7 +1,7 @@
-//import React from 'react'
 import axios from 'axios'
 import {useState} from 'react'
 import {useNavigate, Link} from 'react-router-dom'
+import swal from "sweetalert"
 import 'bootstrap/dist/css/bootstrap.css'
 
 const URI = 'http://localhost:4000/users/signIn'
@@ -14,8 +14,26 @@ const SignIn = () => {
 
     const loggin = async(e) => {
         e.preventDefault()
-        await axios.post(URI, {email: email, password: password})
-        navigate('/operaciones')
+        const res = await axios.post(URI, {email: email, password: password})
+        console.log(res);
+        if (res.data.message !== 'no se encuentra el usuario en la base de datos') {
+            swal({
+                title: "OK", 
+                text: "Bienvenido",
+                icon: "success",
+                button: "OK!"
+            })
+            navigate('/operaciones')
+        } 
+        // else {
+        //     swal({
+        //         title: "fAIL",
+        //         text: res.data.message,
+        //         icon: "error",
+        //         button: "OK!"
+        //     })
+        //     navigate('/')
+        // }
     }
 
   return (
