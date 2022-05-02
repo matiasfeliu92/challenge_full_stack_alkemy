@@ -21,13 +21,35 @@ const ShowOperations = () => {
   return (
     <div className="container">
         <div className="row">
-            {operaciones.map((operacion) => (
-                <div className='col-md-4'>
-                    <h2>{operacion.tipo}</h2>
-                    <h2>{operacion.concepto}</h2>
-                    <h3>{operacion.monto}</h3>
-                </div>
-            ))}
+            <h1>Operaciones Realizadas</h1>
+            <Link to="/guardar" className="btn btn-primary">Ingresa una nueva operacion</Link>
+            <div className="col">
+                <table className="table">
+                    <thead className="table-primary">
+                        <tr>
+                            <th>tipo</th>
+                            <th>monto</th>
+                            <th>fecha</th>
+                            <th>concepto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {operaciones.map((operacion) => (
+                            <tr key= {operacion.id}>
+                            <td>{operacion.tipo}</td>
+                            <td>{operacion.monto}</td>
+                            <td>{operacion.fecha}</td>
+                            <td>{operacion.concepto}</td>
+                            <td>
+                                <Link to={`/actualizar/${operacion.id}`} className='btn btn-info'>Editar</Link>
+                                <button className='btn btn-danger'>Eliminar</button>
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
   )
