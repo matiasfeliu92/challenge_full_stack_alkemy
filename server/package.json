@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "ts-node-dev --respawn app.ts",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "express": "^4.17.3",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "^6.19.0",
     "typeorm": "^0.3.6"
   },
