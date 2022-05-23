@@ -1,9 +1,15 @@
-const Sequelize = require('sequelize')
-const dotenv = require('dotenv').config()
+import { DataSource } from "typeorm";
+import dotenv from 'dotenv'
+dotenv.config()
 
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+export const AppDataSource = new DataSource({
+    type: "mysql",
     host: process.env.DB_HOST,
-    dialect: 'mysql'
+    port: 3306,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    entities: [Canciones],
+    logging: true,
+    synchronize: true 
 })
-
-module.exports = db
